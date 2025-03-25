@@ -1,0 +1,13 @@
+{
+    "name": "ahdlc/website",
+    "description": "Action Humanitaire pour le développement et la lutte contre le chômage",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    }
+}

@@ -14,7 +14,7 @@ class Router
         $this->response = $response;
     }
 
-    public function get(string $path, $callback)
+    public function get($path, $callback)
     {
         $this->routes['get'][$path] = $callback;
     }
@@ -26,8 +26,8 @@ class Router
 
     public function resolve()
     {
-        $path = $this->request->getUrl();
-        $method = $this->request->getMethod();
+        $path = $this->request->getPath();
+        $method = strtolower($this->request->getMethod());
         $callback = $this->routes[$method][$path] ?? false;
 
         if (!$callback) {
@@ -54,14 +54,14 @@ class Router
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    private function layoutContent()
+    protected function layoutContent()
     {
         ob_start();
         include_once Application::$ROOT_DIR . "/views/layouts/main.php";
         return ob_get_clean();
     }
 
-    private function renderOnlyView($view, $params)
+    protected function renderOnlyView($view, $params)
     {
         foreach ($params as $key => $value) {
             $$key = $value;
@@ -69,5 +69,18 @@ class Router
         ob_start();
         include_once Application::$ROOT_DIR . "/views/$view.php";
         return ob_get_clean();
+    }
+}
+
+class Request
+{
+    public function getPath()
+    {
+        $path = $_SERVER['REQUEST_URI'] ?? '/';
+        $position = strpos($path, '?');
+        if ($position === false) {
+            return $path;
+        }
+        return substr($path, 0, $position);
     }
 }

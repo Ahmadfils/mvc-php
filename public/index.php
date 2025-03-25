@@ -2,7 +2,13 @@
 
 use App\Core\Application;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+
+if (!file_exists($autoloadPath)) {
+    die('Please run "composer install" in the project root directory');
+}
+
+require_once $autoloadPath;
 
 $config = [
     'db' => [

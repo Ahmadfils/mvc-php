@@ -14,6 +14,7 @@ This project is a PHP-based web application designed to provide information and 
 ## Directory Structure
 ```
 projet-ahdlc
+├── .htaccess
 ├── config
 │   └── database.php
 ├── controllers
@@ -52,6 +53,7 @@ projet-ahdlc
 │   └── contact
 │       └── index.php
 ├── public
+│   ├── .htaccess
 │   ├── css
 │   │   └── style.css
 │   ├── js
@@ -64,8 +66,14 @@ projet-ahdlc
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Configure the database settings in `config/database.php`.
-4. Set up a web server (e.g., Apache) to serve the `public` directory.
-5. Access the application through your web browser.
+4. Make sure Apache mod_rewrite is enabled:
+   ```bash
+   sudo a2enmod rewrite
+   sudo service apache2 restart
+   ```
+5. Set up a web server (e.g., Apache) to serve the `public` directory.
+6. Ensure .htaccess files are allowed in your Apache configuration.
+7. Access the application through your web browser.
 
 ## Technologies Used
 - PHP

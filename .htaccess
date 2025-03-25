@@ -1,0 +1,6 @@
+# Prevent directory listing
+Options -Indexes
+
+# Deny access to all files except public
+RewriteEngine On
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
